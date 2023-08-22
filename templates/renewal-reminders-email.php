@@ -4,10 +4,7 @@
  * @package  RenewalReminders
  * 
  */
-// function sprr_renewalremindersemail($subscriber_details_first_name,$subscriber_details_last_name, $next_payment_date) {
-// @@@@@ HWS added $subscription_id 
-function sprr_renewalremindersemail($subscriber_details_first_name,$subscriber_details_last_name, $next_payment_date, $subscription_id) {  	
-
+  function sprr_renewalremindersemail($subscriber_details_first_name,$subscriber_details_last_name, $next_payment_date) {
    ob_start(); // We have to turn on output buffering. VERY IMPORTANT! or else wp_mail() wont work ?>
    <!DOCTYPE html>
     <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml"  >
@@ -62,10 +59,6 @@ function sprr_renewalremindersemail($subscriber_details_first_name,$subscriber_d
 															$body_content =  str_replace("{last_name}", $subscriber_details_last_name, $body_content );
                                                             $body_content =  str_replace("{next_payment_date}", $next_payment_date, $body_content );
                                                          
-                                                            // @@@@@ HWS START
-                                                            $body_content = apply_filters( 'hws_renewal_reminders_email_body_content', $body_content, $subscription_id );
-                                                            // @@@@@ HWS END
-                                                            
                                                             $body_content_rr = '<p class="rr-content-text" de="" style="whitespace:pre-line">' . $body_content .'</p>'  ;
                                                             echo  $body_content_rr;
                                                          ?>
