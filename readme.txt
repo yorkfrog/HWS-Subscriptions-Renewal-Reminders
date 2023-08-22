@@ -18,8 +18,8 @@ For example usage see examples/sample-renewal-email-functions.php
 Contributors: StorePro
 Tags: subscriptions, renew subscriptions, renew subscriptions automatically, renew subscriptions days before, reminder emails, subscription reminder emails, renewal alerts
 Requires at least: 5.2
-Tested up to: 6.1.1
-Stable tag: 1.1.2
+Tested up to: 6.2.2
+Stable tag: 1.1.6
 Requires PHP: 7.0
 License: GPL v3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -39,9 +39,36 @@ Install this plugin and make sure your customers have not forgotten the subscrip
 * Option to enter email content via Wysiwyg editor.
 * Automatic sending of e-mails with the help of wp-cron job.
 
+= What the Premium Version offers =
+### Renewal Reminder Pro Plugin offers much more exciting options that could be included on sending reminder emails. <strong>[Get the premium version now!](https://storepro.io/product/renewal-reminder-pro-plugin/)</strong>
+<strong>*Premium Features*</strong>
+<blockquote>
+<p>👉<strong>Type of Subscription</strong> - The ability to choose the type of subscription period renewal reminder emails are sent to. This is useful for websites with mixed subscription periods, as you can avoid sending renewal reminders for subscriptions that don’t actually need them. </p>
+<p>👉<strong>Renewal Periods</strong> - Renewal period can be chosen from the available options which is daily, weekly, monthly or yearly. </p>
+<p>👉<strong>Updating Fields</strong> - The ability to change the from email address and the sender’s name for renewal reminder emails. </p>
+<p>👉<strong>Shortcodes</strong> - Additional shortcodes are included for email templates, such as the total amount, subscription link, and my account link. </p>
+<p>👉<strong>Test Email</strong> -  An email test feature has been included. </p>
+<p>👉<strong>Filters</strong> - Additional filters that allow you to expand the plugin’s functionality and customize email templates. You can also use these filters to modify the subscription period. </p>
+</blockquote>
 
 
 == Changelog ==
+= 1.1.6 - 2023-08-01 =  
+* Minor change in the main plugin file.
+
+
+= 1.1.5 - 2023-07-25 =  
+* Tested with WooCommerce 7.9.0 and Wordpress 6.2.2
+
+
+= 1.1.4 - 2023-05-02 =
+* Bug fixed in the email send out for oh-hold subscription status.
+* Tested with WooCommerce 7.6.1 and Wordpress 6.2
+
+=  1.1.3 - 2023-02-22 =
+* Bug fixed in the email send out for pending-cancelled subscription status.
+* Some minor style changes.
+* Tested with WooCommerce 7.4.0 and WordPress 6.1.1
 
 =  1.1.2 - 2022-12-22 =
 * Bug fixed in the email send out functionality.

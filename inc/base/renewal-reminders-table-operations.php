@@ -72,7 +72,7 @@ class SPRRTableOperations
                 ) 
               );
             }
-        }elseif( $subscription->get_status() == 'cancelled' || $subscription->get_status() == 'expired' ) {
+        }elseif( $subscription->get_status() == 'cancelled' || $subscription->get_status() == 'expired'|| $subscription->get_status() == 'pending-cancel' || $subscription->get_status() == 'on-hold') {
           $wpdb->delete($table_name,  array('subscription__id'=>$subscription_id));
         }
     } 
