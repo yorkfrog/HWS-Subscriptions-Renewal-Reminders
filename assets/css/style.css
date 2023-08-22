@@ -37,8 +37,8 @@ tr.rr-main-row {
     position: absolute;
     opacity: 0;
        
-    transition: all 0.4s ease;
-    /* padding: 10px; */
+    /* transition: all 0.4s cubic-bezier(0.55, 0.09, 0.68, 0.53); */
+    padding: 10px 75px;
     color:white;
     border-radius: 3px;
     box-shadow: 1px 1px .5px silver;    

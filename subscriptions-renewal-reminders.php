@@ -3,7 +3,7 @@
  * Plugin Name:       Subscriptions Renewal Reminders 
  * Plugin URI:        https://example.com/plugins/the-basics/
  * Description:       Renewal Reminders for Subscriptions automatically send your subscribers a courtesy reminder via email X days before their subscription renews. Shortcodes to be used for updating the subscriber's First and Last Names are {first_name} and {last_name} respectively.
- * Version:           1.1.2
+ * Version:           1.1.6
  * Author:            StorePro
  * Author URI:        https://storepro.io/
  * Text Domain:       subscriptions-renewal-reminders
@@ -15,7 +15,7 @@
 
 /*
     Renewal Reminders for Subscriptions, automatically send your subscribers a courtesy reminder via email X days before their subscription renews.
-    Copyright (C) 2022  StorePro
+    Copyright (C) 2022  StorePro  
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
 */
 
 // If this file is called firectly, abort!!!
-defined( 'ABSPATH' ) or die( 'Hey, what are you doing here? You silly human!' );
+defined( 'ABSPATH' ) or die( 'Hey, what are you doing here?' );
 
 /**
  * Check if WooCommerce is active. if it isn't, disable Renewal Reminders.
@@ -70,7 +70,25 @@ if( !is_plugin_active( 'woocommerce-subscriptions/woocommerce-subscriptions.php'
     return;
 }
 
+/**
+ * Check if Renewal Reminders Pro plugin is active. if it isn't, enable Renewal Reminders.
+ */
 
+ if( is_plugin_active( 'subscriptions-renewal-reminders-premium/subscriptions-renewal-reminders.php') ){
+    function sprr_is_pro_plugin_active() {
+        ?>
+        <div class="error notice">
+            <p><?php esc_html_e( 'Subscriptions Renewal Reminders Pro is active. Please deactivate the Pro Plugin to activate the free version »', 'renewal-reminders-sp' ); ?></p>
+        </div>
+        <?php
+    }
+    add_action( 'admin_notices', 'sprr_is_pro_plugin_active' );
+    deactivate_plugins(plugin_basename(__FILE__));
+    unset($_GET['activate']);
+    return;
+}
+
+ 
 /**
  * Woocommerce Version Check
  */
@@ -97,7 +115,7 @@ define('SPRR_PLUGIN_DIR', plugin_dir_path( __FILE__ ));
 /*
  * The code that runs during plugin activation
  */
-function sprr_activate_storepro_plugin() {
+function sprr_free_activate_storepro_plugin() {
 	require_once SPRR_PLUGIN_DIR . 'inc/base/renewal-reminders-activate.php';
 	SPRRActivate::sprr_activate();
     $time_value = stripslashes_deep(esc_attr( get_option( 'email_time' ) ));
@@ -109,19 +127,19 @@ function sprr_activate_storepro_plugin() {
         wp_schedule_event( strtotime($time_value), 'daily', 'renewal_reminders' );
     }
 }
-register_activation_hook( __FILE__, 'sprr_activate_storepro_plugin' );
+register_activation_hook( __FILE__, 'sprr_free_activate_storepro_plugin' );
 
 
 /**
  * The code that runs during plugin deactivation
  */
-function sprr_deactivate_storepro_plugin() {
+function sprr_free_deactivate_storepro_plugin() {
 	require_once SPRR_PLUGIN_DIR . 'inc/base/renewal-reminders-deactivate.php';
 	SPRRDeactivate::sprr_deactivate();
     
 	wp_clear_scheduled_hook( 'renewal_reminders' );
 }
-register_deactivation_hook( __FILE__, 'sprr_deactivate_storepro_plugin' );
+register_deactivation_hook( __FILE__, 'sprr_free_deactivate_storepro_plugin' );
 
 
 /**
@@ -139,7 +157,7 @@ if ( class_exists( 'SPRRInit' ) )
 
 function renew_get_data_test() {
 
-    require_once SPRR_PLUGIN_DIR . 'inc/base/renewal-reminders-activate.php';
+    require_once SPRR_PLUGIN_DIR . 'inc/base/renewal-reminders-table-operations.php';
    SPRRTableOperations::sprr_active_subscription_list();
    
 }
@@ -151,7 +169,7 @@ add_action( 'wp_ajax_renew_get_data_test', 'renew_get_data_test' );
 
 function renew_sunscription_change_db_update() {
 
-    require_once SPRR_PLUGIN_DIR . 'inc/base/renewal-reminders-activate.php';
+    require_once SPRR_PLUGIN_DIR . 'inc/base/renewal-reminders-table-operations.php';
     SPRRTableOperations::sprr_active_subscription_list();
 }
 add_action('woocommerce_subscription_status_updated','renew_sunscription_change_db_update');
