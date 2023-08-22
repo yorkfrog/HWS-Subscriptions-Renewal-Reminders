@@ -1,19 +1,3 @@
-=== HWS Mods ===
-
-// Added filter: renewal_reminders_email_body_content
-// Allow additional replacement tokens to be added to email body content
-subscriptions-renewal-reminders/templates/renewal-reminders-email.php
-
-// added filter: renewal_reminders_should_send_for_period
-// Allows a filter to choose if a reminder is sent for a given subscription period
-subscriptions-renewal-reminders/inc/base/renewal-reminders-send-notifications.php
-
-I have mixed period subscriptions on site (mostly monthly, yearly) and I only send renewal reminders for yearly subs - it would be really annoying for monthly subscribers.
-Using the body content filter I am able to provide much more useful; info in the emails. e.g :
-
-For example usage see examples/sample-renewal-email-functions.php
-
-
 === Renewal Reminders ===
 Contributors: StorePro
 Tags: subscriptions, renew subscriptions, renew subscriptions automatically, renew subscriptions days before, reminder emails, subscription reminder emails, renewal alerts
